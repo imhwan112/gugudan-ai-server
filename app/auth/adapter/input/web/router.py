@@ -291,8 +291,6 @@ async def oauth_callback_session(
             httponly=False,  # Must be readable by JavaScript
             secure=settings.COOKIE_SECURE,
             samesite=settings.COOKIE_SAMESITE,
-            secure=settings.effective_cookie_secure,
-            samesite="strict",
             max_age=settings.SESSION_TTL_SECONDS,
         )
 
