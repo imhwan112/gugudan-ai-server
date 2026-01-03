@@ -25,9 +25,10 @@ class S3Service:
         self.cf_domain = settings.CLOUDFRONT_DOMAIN
         self.cf_key_id = settings.CLOUDFRONT_KEY_ID
 
-        key_path = settings.CLOUDFRONT_PRIVATE_KEY_PATH
+        self.key_path = settings.CLOUDFRONT_PRIVATE_KEY_PATH
+
         try:
-            with open(key_path, 'r') as f:
+            with open(self.key_path, 'r') as f:
                 self.private_key_content = f.read().strip()
         except Exception as e:
             print(f"❌ Key Load Error: {str(e)}")
