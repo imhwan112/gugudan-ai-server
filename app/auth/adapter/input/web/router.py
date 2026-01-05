@@ -157,11 +157,12 @@ async def oauth_login(
             secure=settings.effective_cookie_secure,
             samesite=settings.COOKIE_SAMESITE,
             path="/",
-            domain=".love-note.me",
+            domain="love-note.me",
             max_age=600,  # 10 minutes
         )
 
         print(f"response {response}")
+        print(f"response.body {response.body}")
         return response
 
     except (UnsupportedOAuthProviderException, ValueError) as e:
@@ -187,7 +188,6 @@ async def oauth_callback(
     # Verify state matches cookie (CSRF protection)
     cookie_state = request.cookies.get("oauth_state")
 
-    print(request)
     print(request.cookies)
     print(cookie_state)
 
@@ -217,7 +217,7 @@ async def oauth_callback(
             httponly=settings.JWT_HTTPONLY,
             secure=settings.effective_cookie_secure,
             samesite=settings.COOKIE_SAMESITE,
-            domain=".love-note.me",
+            domain="love-note.me",
             max_age=max_age,
         )
 
@@ -228,7 +228,7 @@ async def oauth_callback(
             httponly=False,  # Must be readable by JavaScript
             secure=settings.effective_cookie_secure,
             samesite="strict",
-            domain=".love-note.me",
+            domain="love-note.me",
             max_age=max_age,
         )
 
@@ -288,7 +288,7 @@ async def oauth_callback_session(
             httponly=True,
             secure=settings.effective_cookie_secure,
             samesite=settings.COOKIE_SAMESITE,
-            domain=".love-note.me",
+            domain="love-note.me",
             max_age=settings.SESSION_TTL_SECONDS,
         )
 
@@ -299,7 +299,7 @@ async def oauth_callback_session(
             httponly=False,  # Must be readable by JavaScript
             secure=settings.COOKIE_SECURE,
             samesite=settings.COOKIE_SAMESITE,
-            domain=".love-note.me",
+            domain="love-note.me",
             max_age=settings.SESSION_TTL_SECONDS,
         )
 
@@ -363,7 +363,7 @@ async def refresh_token(
         httponly=settings.JWT_HTTPONLY,
         secure=settings.effective_cookie_secure,
         samesite=settings.COOKIE_SAMESITE,
-        domain=".love-note.me",
+        domain="love-note.me",
         max_age=max_age,
     )
 
@@ -374,7 +374,7 @@ async def refresh_token(
         httponly=False,
         secure=settings.effective_cookie_secure,
         samesite="strict",
-        domain=".love-note.me",
+        domain="love-note.me",
         max_age=max_age,
     )
 
