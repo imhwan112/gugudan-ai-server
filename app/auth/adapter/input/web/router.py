@@ -155,7 +155,7 @@ async def oauth_login(
             value=state,
             httponly=True,
             secure=settings.effective_cookie_secure,
-            samesite=settings.COOKIE_SAMESITE,
+            samesite="lax",
             max_age=600,  # 10 minutes
         )
 
@@ -183,6 +183,9 @@ async def oauth_callback(
     """
     # Verify state matches cookie (CSRF protection)
     cookie_state = request.cookies.get("oauth_state")
+
+    print(request)
+    print(cookie_state)
 
     if not cookie_state or cookie_state != state:
         raise HTTPException(
